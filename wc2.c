@@ -1,30 +1,32 @@
 #include <stdio.h>
 
-int main() {
+int main(int argc, char* argv []) {
 
+	char file_name[25]; 	
 	FILE *arquivo;
-	int c;
+	int c, cl = 0, cb = 0, cp = 0, lastchar;
+	
 
-    int cl = 0;
-    int cb = 0;
-    int cp = 0;
-	printf("
-	arquivo = fopen("wc2.c", "r");
+	arquivo = fopen(argv[1], "r");
 
 	c = getc(arquivo);
     while( c != -1 )
     {
         cb++;
         if (c == '\n')
-            cl = cl + 1;
-        if (c == ' ')
-            cp = cp + 1;
+            cl++;
 
-		printf("%i %c %x\n", c, c, c);
+       /*TODO fix the word identification statement*/ 
+ 		if (c == ' ')
+			cp++;
+		
+		
+		printf("%2i %3c %-4x\n", c, c, c);
+		lastchar = c;		
 		c = getc(arquivo);
 	}
 
-    printf("L=%i P=%i B=%i\n", cl, cp, cb);
+    printf("Linhas=%i Palavras=%i Bytes=%i\n", cl, cp, cb);
 
 
 	fclose(arquivo);
